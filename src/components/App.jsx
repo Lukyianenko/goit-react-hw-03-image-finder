@@ -1,5 +1,6 @@
 import { Component } from "react";
 import css from './SearchImg/styles.module.css';
+import { Audio } from 'react-loader-spinner';
 import Searchbar from './SearchImg/Searchbar';
 import { ImageGallery } from './SearchImg/ImageGallery';
 import { Button } from './SearchImg/Button';
@@ -39,6 +40,10 @@ class App extends Component {
 
   async componentDidUpdate(prevProps, prevState) {
     if(prevState.searchName !== this.state.searchName) {
+      this.setState({
+        status: 'pending',
+      })
+
       fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`)
       .then(resp => resp.json())
       .then(data => {
@@ -73,6 +78,10 @@ class App extends Component {
           <ImageGallery images={this.state.images} />
           <Button pageClick={this.onClickLoadMore}/>
           </>
+        }
+        {
+          status === 'pending' && 
+          <Audio />
         }
   
   
