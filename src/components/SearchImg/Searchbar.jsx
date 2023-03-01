@@ -7,6 +7,7 @@ import { FaSearch } from 'react-icons/fa';
 class Searchbar extends Component {
     state = {
         name: '',
+
     }
 
   OnInputChange = (e) => {
@@ -28,10 +29,12 @@ class Searchbar extends Component {
     })
   }
 
+
+
     render() {
         return (
             <header className={css.Searchbar}>
-            <form className={css.SearchForm}>
+            <form className={css.SearchForm} onSubmit={this.onSubmitContact}>
             
               <button type="submit" className={css.SearchFormButton}>
               <FaSearch size={30}/>
