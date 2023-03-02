@@ -6,13 +6,20 @@ import { Modal } from './Modal';
 export class ImageGallery extends Component {
     state = {
         id: null,
-        isOpen: false,
+        isOpen: 'false',
     }
 
     onLoadId= id => {
         this.setState({
             id: id,
-            isOpen: true,
+            isOpen: 'true',
+        })
+    }
+
+    onClose = isClose => {
+        console.log(typeof(isClose));
+        this.setState({
+            isOpen: isClose,
         })
     }
 
@@ -20,7 +27,7 @@ export class ImageGallery extends Component {
         const { images, onLargeImage } = this.props;
         return(<ul className={css.ImageGallery}>
             <ImageGalleryItem images={images} onLargeImage={onLargeImage} loadId={this.onLoadId}/>
-            {this.state.isOpen && <Modal images={images} id={this.state.id}/>}
+            {this.state.isOpen === 'true' && <Modal images={images} id={this.state.id} onClose={this.onClose}/>}
         </ul>
         )
     } 

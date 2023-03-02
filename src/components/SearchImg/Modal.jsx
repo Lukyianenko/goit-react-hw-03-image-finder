@@ -1,14 +1,38 @@
 import css from './styles.module.css';
+import { Component } from "react";
 
 
-export const Modal =({ images, id }) => {
+export class Modal extends Component {
+
+    onClose = (e) => {
+        console.log(e.code);
+        if(e.code === 'Escape') {
+            this.props.onClose('false')
+        }
+    }
+
+    onCloseBackdrop = (e) => {
+        if(e.currentTarget === e.target) {
+            this.props.onClose('false')
+        }
+    }
+
+    componentDidMount() {
+        window.addEventListener('keydown', this.onClose)
+    }
+    componentWillUnmount() {
+    window.removeEventListener('keydown', this.onClose)
+    }
+
+    render() {
+        const { images, id } = this.props;
     const image = images.filter(image => image.id === id);
     return (
-        <div className={css.Overlay}>
+        <div className={css.Overlay} onClick={this.onCloseBackdrop}>
         <div className={css.Modal}>
             <img src={image[0].largeImageURL} alt={image.tags} />
         </div>
     </div>
     )
-    
+    }
 }
