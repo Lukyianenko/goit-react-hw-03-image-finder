@@ -1,5 +1,6 @@
 import css from './styles.module.css';
 import { Component } from "react";
+import PropTypes from 'prop-types';
 
 
 export class Modal extends Component {
@@ -20,6 +21,7 @@ export class Modal extends Component {
     componentDidMount() {
         window.addEventListener('keydown', this.onClose)
     }
+    
     componentWillUnmount() {
     window.removeEventListener('keydown', this.onClose)
     }
@@ -35,4 +37,12 @@ export class Modal extends Component {
     </div>
     )
     }
+}
+
+Modal.propTypes = {
+    image: PropTypes.arrayOf(PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        largeImageURL: PropTypes.string.isRequired,
+        tags: PropTypes.string.isRequired,
+    }))
 }

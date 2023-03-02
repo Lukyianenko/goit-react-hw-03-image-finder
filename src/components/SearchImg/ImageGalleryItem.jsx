@@ -1,6 +1,6 @@
 import css from './styles.module.css';
 import { Component } from "react";
-
+import PropTypes from 'prop-types';
 
 class ImageGalleryItem extends Component {
 render() {
@@ -14,6 +14,14 @@ render() {
     )
 ))   
 }
+}
+
+ImageGalleryItem.propTypes = {
+    image: PropTypes.arrayOf(PropTypes.exact({
+        id: PropTypes.number.isRequired,
+        webformatURL: PropTypes.string.isRequired,
+        tags: PropTypes.string.isRequired,
+    }))
 }
 
 export default ImageGalleryItem;

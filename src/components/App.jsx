@@ -42,6 +42,7 @@ class App extends Component {
     if(prevState.searchName !== this.state.searchName) {
       this.setState({
         status: 'pending',
+        page: 1,
       })
 
       fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=${this.state.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`)

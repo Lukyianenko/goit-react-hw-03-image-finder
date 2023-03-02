@@ -1,5 +1,6 @@
 import css from './styles.module.css';
 import { Component } from "react";
+import PropTypes from 'prop-types';
 import ImageGalleryItem from './ImageGalleryItem';
 import { Modal } from './Modal';
 
@@ -31,4 +32,9 @@ export class ImageGallery extends Component {
         </ul>
         )
     } 
+}
+
+ImageGallery.propTypes = {
+    images: PropTypes.array.isRequired,
+    onLargeImage: PropTypes.func
 }
