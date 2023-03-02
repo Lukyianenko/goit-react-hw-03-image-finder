@@ -48,11 +48,19 @@ class App extends Component {
       .then(resp => resp.json())
       .then(data => {
         if(data.hits.length === 0) {
-          alert('Picture no faund')
+          if(prevState.searchName === this.state.searchName) {
+            alert('Picture not faund');
+          this.setState({ status: 'idle' });
           return
+          } else {
+            alert('Picture not faund');
+          this.setState({ status: 'idle' });
+          return
+          }
+          
         }
         this.setState({ images: data.hits, status: 'resolved' })})
-      .catch(erorr => alert(erorr))
+        .catch(erorr => alert(erorr))
     }
     if(prevState.page + 1 === this.state.page) {
       fetch(`https://pixabay.com/api/?q=${this.state.searchName}&page=1&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=${this.state.page * 12}`)
@@ -69,22 +77,17 @@ class App extends Component {
 
 
   render() {
-    console.log(this.state.page)
    const { status } =this.state
     return (
       <div className={css.App}>
         <Searchbar onSubmit={this.onSubmitSaveName}/>
         {status === 'resolved' && <>
-          <ImageGallery images={this.state.images} />
+          <ImageGallery images={this.state.images} onLargeImage={this.onLargeImage}/>
           <Button pageClick={this.onClickLoadMore}/>
           </>
         }
-        {
-          status === 'pending' && 
-          <Audio />
-        }
-  
-  
+        { status === 'pending' &&  <Audio /> }
+
       </div>
     );
   }
