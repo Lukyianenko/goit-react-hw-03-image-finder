@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 export class Modal extends Component {
 
     onClose = (e) => {
-        console.log(e.code);
         if(e.code === 'Escape') {
             this.props.onClose('false')
         }
