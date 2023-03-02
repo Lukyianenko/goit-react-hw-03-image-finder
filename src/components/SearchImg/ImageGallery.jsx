@@ -18,7 +18,6 @@ export class ImageGallery extends Component {
     }
 
     onClose = isClose => {
-        console.log(typeof(isClose));
         this.setState({
             isOpen: isClose,
         })
